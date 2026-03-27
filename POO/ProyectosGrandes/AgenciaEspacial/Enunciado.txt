@@ -1,0 +1,113 @@
+ENUNCIADO
+
+La Agencia Espacial Internacional requiere una aplicación para gestionar la tripulación de la nave Odisea en su viaje a Marte. 
+La tripulación está compuesta tanto por seres humanos (Astronautas) como por unidades robóticas (Androides).
+
+Se pide implementar una solución en Java que cumpla estrictamente con la siguiente arquitectura de clases y requisitos funcionales.
+
+1. ESTRUCTURA DE CLASES E INTERFACES
+
+A. Clase Tripulante
+
+	Debe diseñarse como una clase base que no pueda ser instanciada directamente.
+
+	Atributos:
+
+		nombre (Cadena de texto).
+
+		nivelSalud (Entero, rango 0-100).
+
+	Constructores: Debe permitir la inicialización obligatoria del nombre y la salud.
+
+	Métodos:
+
+		Métodos de acceso y modificación (getters/setters) con validación (ver apartado 2).
+
+		mostrarEstado(): Devuelve una cadena con la información básica del tripulante.
+
+		trabajar(): Método abstracto que definirá la acción principal de cada tripulante.
+
+B. Interfaz Recargable
+
+	Define el comportamiento para entidades que operan con energía eléctrica.
+
+	Métodos a implementar:
+
+		recargarEnergia(int cantidad): Incrementa el nivel de energía.
+
+		getNivelBateria(): Devuelve la carga actual.
+
+C. Clase Astronauta
+
+	Hereda de Tripulante.
+
+	Atributos adicionales:
+
+		especialidad (Cadena: "Piloto", "Biólogo", etc.).
+
+	Comportamiento:
+
+		La implementación de trabajar() debe imprimir un mensaje indicando su especialidad y 
+		reducir su nivelSalud en 5 puntos como consecuencia del esfuerzo.
+
+D. Clase Androide
+
+	Hereda de Tripulante e implementa Recargable.
+
+	Atributos adicionales:
+
+		nivelBateria (Entero, rango 0-100).
+
+	Comportamiento:
+
+		La implementación de trabajar() debe consumir un 10% de batería e imprimir un mensaje de procesamiento.
+
+	Restricción Crítica: Si al intentar trabajar, el nivel de batería es inferior al 10%, 
+	el androide no debe trabajar y debe lanzar una excepción específica (ver apartado 2).
+
+2. GESTIÓN DE ERRORES Y EXCEPCIONES
+
+	Excepción Personalizada: Implemente la clase BateriaBajaException. Debe ser una excepción verificada (checked exception).
+
+	Validación de Datos:
+
+		En la clase Tripulante, si se intenta asignar un nivelSalud negativo a través del constructor o el setter, 
+		se debe lanzar una IllegalArgumentException.
+
+3. LÓGICA DE CONTROL (CLASE MAIN)
+
+	Cree una clase ejecutable ControlMision que gestione una colección dinámica de tripulantes. El programa debe presentar el siguiente menú repetitivo:
+
+	Registrar Tripulante:
+
+		Debe solicitar al usuario el tipo de tripulante (Astronauta o Androide) y sus datos correspondientes.
+
+		Debe controlar errores de entrada de datos (ej. introducir texto cuando se pide un número).
+
+	Informe de Estado:
+
+		Debe recorrer la estructura de datos y mostrar la información de todos los tripulantes registrados.
+
+	Realizar Tareas de Misión:
+
+		Debe ordenar a todos los tripulantes que ejecuten su método trabajar().
+
+	Manejo de Incidencias: El sistema debe ser capaz de capturar la excepción lanzada por un Androide con batería baja, 
+			imprimir una alerta de seguridad por pantalla indicando el nombre del androide afectado, 
+			y continuar con la ejecución del resto de tripulantes.
+
+	Recargar Unidades:
+
+		Debe identificar automáticamente qué miembros de la tripulación son Recargable y restablecer su energía al 100%.
+
+	Salir del sistema.
+
+	Criterios de Evaluación:
+
+	Correcta aplicación de Herencia y Polimorfismo.
+
+	Uso adecuado de la abstracción y encapsulamiento.
+
+	Manejo correcto de excepciones (Checked vs Unchecked).
+
+	Robustez ante entradas de usuario inválidas.

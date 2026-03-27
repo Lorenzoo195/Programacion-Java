@@ -1,0 +1,19 @@
+# Configuraciones locales de los editores y entornos
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Clases compiladas de Java y volcados de fallos
+*.class
+*.log
+
+# Carpetas de empaquetado y salidas (out, target, bin, build)
+out/
+build/
+bin/
+
+# Archivos del sistema operativo (que a veces se cuelan)
+.DS_Store
+Thumbs.db

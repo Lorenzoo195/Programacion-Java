@@ -1,0 +1,55 @@
+PRUEBA TÉCNICA: MOTOR DE JUEGO RPG
+
+        Cliente: FantasySoft Inc.
+        Objetivo: Implementar la lógica del núcleo de combate.
+
+REQUERIMIENTOS FUNCIONALES
+
+El sistema debe gestionar un grupo heterogéneo de unidades de combate. Actualmente existen dos tipos de unidades:
+Guerreros y Magos, aunque en el futuro podrían añadirse más.
+
+    1. Definición de Entidades
+
+        Todas las unidades, sin excepción, tienen un Nombre y una Vida (con un valor máximo definido al nacer).
+
+        La vida nunca puede ser negativa ni superar el máximo.
+
+        Importante: En el juego no existen "unidades genéricas", siempre debe ser una unidad específica (Guerrero o Mago),
+            por lo que el sistema debe impedir la creación de entidades base vacías.
+
+    2. Comportamiento de las Unidades
+
+        Guerreros: Se caracterizan por su Fuerza. Su ataque consiste en un espadazo cuyo daño es el doble de su fuerza.
+
+        Magos: Se caracterizan por su Maná (energía mágica), que empieza siempre en 100.
+            Su ataque físico es débil (siempre 5 de daño con el bastón).
+
+    3. Sistema de Magia
+
+        El cliente especifica que la capacidad de usar magia no es exclusiva de los Magos (en el futuro habrá Paladines o Brujos).
+            Cualquier entidad capaz de usar magia debe cumplir estrictamente con dos operaciones:
+
+        Lanzar Hechizo: Consume 10 puntos de maná.
+
+        Meditar: Recupera 20 puntos de maná (sin pasar del máximo).
+
+    4. Gestión de Errores Críticos
+
+        El sistema debe ser robusto. Si una unidad intenta usar magia sin tener maná suficiente,
+            se considera un fallo de operación. Este fallo no debe pasar desapercibido:
+            el sistema principal debe ser capaz de detectarlo específicamente
+            y reaccionar obligando a esa unidad a meditar automáticamente en ese mismo turno.
+
+ESPECIFICACIONES DEL PROGRAMA (MAIN)
+
+        Desarrolle una consola de control con las siguientes funciones:
+
+        Reclutamiento: Permitir al usuario añadir nuevas unidades (Guerreros o Magos) al ejército.
+
+        Reporte de Tropa: Mostrar el estado actual de todas las unidades.
+            Nota: El cliente quiere ver el Maná de las unidades mágicas en este reporte.
+
+        Simulación de Batalla: Ejecutar una ronda donde todas las unidades atacan.
+
+        Turno Mágico: Ejecutar una ronda donde solo las unidades capaces de usar magia intentan lanzar un hechizo.
+        (Aquí es donde debe gestionarse el error de falta de maná).
